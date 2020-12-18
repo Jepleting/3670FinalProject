@@ -1,11 +1,9 @@
 import random
 import sys
 
-def subnet_calculation():
+def subnet_calculation(ip_address, subnet_mask):
         print("\n")
-        
-        ip_address = input(" Enter your IP address: ")
-        subnet_mask = input("Enter your subnet mask: ")
+
         
         #calculate subnet based on IP and subnet mask
 
@@ -100,4 +98,6 @@ def subnet_calculation():
         
         
 if __name__ == "__main__":
-    subnet_calculation()
+    ip_address = input(" Enter your IP address: ")
+    subnet_mask = input("Enter your subnet mask: ")
+    subnet_calculation(ip_address, subnet_mask)
