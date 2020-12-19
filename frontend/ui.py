@@ -66,7 +66,7 @@ style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
 '''
 def nslookup(Host_name):
     print('#'*70)
-    #Host_name = raw_input('Enter the host name: ')
+    # Host_name = raw_input('Enter the host name: ')
     print('-'*70)
     os.system('nslookup {}'.format(Host_name))
     print('-'*70)
@@ -81,7 +81,7 @@ def openNewWindow(var):
 
     def nslookup(Host_name):
         print('#'*70)
-        #Host_name = raw_input('Enter the host name: ')
+        # Host_name = raw_input('Enter the host name: ')
         print('-'*70)
         os.system('nslookup {}'.format(Host_name))
         print('-'*70)
@@ -132,41 +132,59 @@ def openNewWindow(var):
             print('Command does not work')
         print('-'*60)
 
-    def portScanner(IP):
+    import socket
+    import threading
+
+    def portScanner(host_ip='172.217.1.164'):
+
+        connections = []        # To run connections at the same time
+        result = {}         # all
+        OpenPorts = []
+
         # translate hostname to IPv4
-        ip = socket.gethostbyname(IP)
+        ip = socket.gethostbyname(host_ip)
 
         # prints status block of target and when the scan starts
         print("-" * 50)
         print("Scanning: " + ip)
-        print("Scanning started at:" + str(datetime.now()).split('.')[0])
+        print("Scanning began at: " + str(datetime.now()).split('.')[0])
+        print("**approximate runtime is 1 minute 30 seconds**")
         print("-" * 50)
+
+        # Spawning threads to scan ports
+        for a in range(65535):
+            t = threading.Thread(target=TCP_connect, args=(ip, a, result))
+            connections.append(t)
+
+        # Starting threads
+        for b in range(65535):
+            connections[b].start()
+
+        # Locking the main thread until all threads complete
+        for c in range(65535):
+            connections[c].join()
+
+        # Printing open ports
+        for d in range(65535):
+            if result[d] == 'open':
+                print("Port", d, 'is', result[d])
+                OpenPorts.append(d)
+
+        # Printing open ports in the list
+
+        print("\nThe Open Ports are:", OpenPorts)
+        # Print out Completion time
+        print("\nScanning has finished at ", str(datetime.now()).split('.')[0])
+
+    def TCP_connect(ip, port, result):
+        TCPsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        TCPsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        TCPsock.settimeout(1)
         try:
-            # scan ports between 1 to 65,535
-            openPorts = []
-            for port in range(1, 65535):
-                # create socket
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                socket.setdefaulttimeout(1)
-
-                # s.connect_ex() returns 0 if port is open
-                c = s.connect_ex((ip, port))
-                if c == 0:
-                    print("Port", port, "is open")
-                    openPorts.append(port)
-                s.close()
-
-            print(" List of Open Ports:", openPorts)
-
-        except KeyboardInterrupt:
-            print("\n Scan Stopped.")
-            sys.exit()
-        except socket.gaierror:
-            print("\n Hostname could not Be Resolved.")
-            sys.exit()
-        except socket.error:
-            print("\ Server could not be reached.")
-            sys.exit()
+            TCPsock.connect((ip, port))
+            result[port] = 'open'
+        except:
+            result[port] = ''
 
     def subnet_calculation(ip_address, subnet_mask):
         print("\n")
@@ -256,7 +274,7 @@ def openNewWindow(var):
         print("Number of hosts in subnet: %s" % num_of_hosts)
         print("Wildcard mask is: %s " % wildcard_mask)
         print("Mask bit is: %s " % num_ones)
-
+    #
     if var == 1:
         newWindow.title("Port Scan")
         tk.Label(newWindow,
