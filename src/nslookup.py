@@ -1,11 +1,13 @@
 import os
 import sys
 
-def nslookup():
-    print('#'*70)
-    Host_name = raw_input('Enter the host name: ')
+def nslookup(Host_name):
     print('-'*70)
-    os.system('nslookup {}'.format(Host_name)) 
+    try:
+        if os.system('nslookup {}'.format(Host_name)) != 0: # if it is not != 0 then something is wrong and raise Exception
+            raise Exception('Host does not exist')
+    except:
+        print('Command does not work')
     print('-'*70)
     sys.exit(1)
 
