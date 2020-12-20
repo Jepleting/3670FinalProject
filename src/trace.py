@@ -21,5 +21,5 @@ def traceroute(route_to_test):
         print('Command does not work')
     print('-'*60)
     sys.exit(1)
-option()
+
 
