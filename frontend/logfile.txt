@@ -1,0 +1,141 @@
+The result of subnet calcualtion: 
+
+
+Network address is: 192.168.2.0
+Broadcast address is: 192.168.2.255
+Number of hosts in subnet: 254
+Wildcard mask is: 0.0.0.255 
+Mask bit is: 24 
+The result of subnet calcualtion: 
+Network address is: 192.168.2.0
+None
+Broadcast address is: 192.168.2.255
+None
+Number of hosts in subnet: 254
+None
+Wildcard mask is: 0.0.0.255 
+None
+Mask bit is: 24 
+None
+3
+------------------------------------------------------------
+Command does not work
+------------------------------------------------------------
+------------------------------------------------------------
+The result of ping is: 
+Server:		2001:558:feed::1
+Address:	2001:558:feed::1#53
+
+Non-authoritative answer:
+Name:	www.google.com
+Address: 172.217.0.4
+
+
+------------------------------------------------------------
+------------------------------------------------------------
+Command does not work
+------------------------------------------------------------
+The result of nslookup is 
+The result of traceroute is: 
+ 1  192.168.0.1 (192.168.0.1)  3.778 ms  2.365 ms  2.162 ms
+ 2  96.120.41.37 (96.120.41.37)  10.711 ms  12.205 ms  14.850 ms
+ 3  68.85.188.141 (68.85.188.141)  19.021 ms  12.029 ms  11.724 ms
+ 4  be-44-ar02.pontiac.mi.michigan.comcast.net (68.85.222.181)  12.504 ms  42.094 ms  16.362 ms
+ 5  be-32141-cs04.350ecermak.il.ibone.comcast.net (96.110.42.189)  31.294 ms
+    be-32121-cs02.350ecermak.il.ibone.comcast.net (96.110.42.181)  22.908 ms  20.925 ms
+ 6  be-2301-pe01.350ecermak.il.ibone.comcast.net (96.110.37.10)  20.038 ms
+    be-2311-pe11.350ecermak.il.ibone.comcast.net (96.110.33.202)  24.253 ms
+    be-2211-pe11.350ecermak.il.ibone.comcast.net (96.110.33.198)  24.861 ms
+ 7  96-87-9-122-static.hfc.comcastbusiness.net (96.87.9.122)  23.835 ms
+    66.208.233.90 (66.208.233.90)  18.644 ms
+    50.208.232.238 (50.208.232.238)  19.738 ms
+ 8  * * *
+ 9  216.239.42.34 (216.239.42.34)  24.851 ms
+    108.170.243.225 (108.170.243.225)  20.778 ms  20.082 ms
+10  ord38s18-in-f4.1e100.net (172.217.4.36)  26.729 ms
+    216.239.47.87 (216.239.47.87)  20.089 ms
+    216.239.47.129 (216.239.47.129)  25.624 ms
+
+------------------------------------------------------------
+The result of traceroute is: 
+ 1  192.168.0.1 (192.168.0.1)  3.771 ms  1.890 ms  3.547 ms
+ 2  96.120.41.37 (96.120.41.37)  24.247 ms  11.525 ms  16.441 ms
+ 3  68.85.188.141 (68.85.188.141)  11.278 ms  15.502 ms  12.932 ms
+ 4  be-44-ar02.pontiac.mi.michigan.comcast.net (68.85.222.181)  14.369 ms  13.225 ms  16.173 ms
+ 5  be-32141-cs04.350ecermak.il.ibone.comcast.net (96.110.42.189)  22.675 ms
+    be-32111-cs01.350ecermak.il.ibone.comcast.net (96.110.42.177)  19.051 ms  18.600 ms
+ 6  be-2104-pe04.350ecermak.il.ibone.comcast.net (96.110.37.34)  18.970 ms
+    be-2211-pe11.350ecermak.il.ibone.comcast.net (96.110.33.198)  17.653 ms
+    be-2301-pe01.350ecermak.il.ibone.comcast.net (96.110.37.10)  19.529 ms
+ 7  75.149.231.2 (75.149.231.2)  17.609 ms
+    66.208.233.90 (66.208.233.90)  18.168 ms
+    96-87-9-122-static.hfc.comcastbusiness.net (96.87.9.122)  19.524 ms
+ 8  * * *
+ 9  108.170.233.84 (108.170.233.84)  30.035 ms
+    108.170.238.88 (108.170.238.88)  25.349 ms
+    ord38s01-in-f4.1e100.net (172.217.6.4)  17.656 ms
+
+------------------------------------------------------------
+5
+######################################################################
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+The result of nslookup is 
+Server:		2001:558:feed::1
+Address:	2001:558:feed::1#53
+
+Non-authoritative answer:
+Name:	www.uwindsor.ca
+Address: 137.207.71.197
+
+
+######################################################################
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+The result of nslookup is 
+Server:		2001:558:feed::1
+Address:	2001:558:feed::1#53
+
+Non-authoritative answer:
+Name:	www.uwindsor.ca
+Address: 137.207.71.197
+
+
+######################################################################
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+The result of nslookup is 
+Server:		2001:558:feed::1
+Address:	2001:558:feed::1#53
+
+Non-authoritative answer:
+Name:	www.uwindsor.ca
+Address: 137.207.71.197
+
+
+2
+
+
+The result of subnet calcualtion: 
+Network address is: 192.168.2.0
+None
+Broadcast address is: 192.168.2.255
+None
+Number of hosts in subnet: 254
+None
+Wildcard mask is: 0.0.0.255 
+None
+Mask bit is: 24 
+None
+1
+--------------------------------------------------
+None
+Scanning: 192.168.2.100
+None
+Scanning began at: 2020-12-20 16:18:07
+None
+**approximate runtime is 1 minute 30 seconds**
+None
+--------------------------------------------------
+None
+3

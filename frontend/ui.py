@@ -11,7 +11,7 @@ window.title("Network Troubleshooting Tools App")
 window.geometry('800x800')
 window.configure(bg='white')
 photo = tk.PhotoImage(
-    file=r"components\Background.jpg")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/Background.jpg")
 
 w = photo.width()
 h = photo.height()
@@ -25,27 +25,27 @@ style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
 # Defining photos
 
 photo0 = tk.PhotoImage(
-    file=r"components\NetworkTools.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/NetworkTools.png")
 photo1 = tk.PhotoImage(
-    file=r"components\PortScanner.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/PortScanner.png")
 photo2 = tk.PhotoImage(
-    file=r"components\SubnetAndIPCalculator.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/SubnetAndIPCalculator.png")
 photo3 = tk.PhotoImage(
-    file=r"components\Ping.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/Ping.png")
 photo4 = tk.PhotoImage(
-    file=r"components\TraceRoute.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/TraceRoute.png")
 photo5 = tk.PhotoImage(
-    file=r"components\NsLookup.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/NsLookup.png")
 photo6 = tk.PhotoImage(
-    file=r"components\Scan2.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/Scan2.png")
 photo7 = tk.PhotoImage(
-    file=r"components\Pingbutto.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/Pingbutto.png")
 photo8 = tk.PhotoImage(
-    file=r"components\TraceWin.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/TraceWin.png")
 photo9 = tk.PhotoImage(
-    file=r"components\traceMac.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/traceMac.png")
 photo10 = tk.PhotoImage(
-    file=r"components\calc.png")
+    file=r"/Users/keerthanamadhavan/3670FinalProject/frontend/components/calc.png")
 
 
 # Defining the main label
@@ -73,6 +73,15 @@ btn5 = st.Button(window, text='Nslookup',
 btn5.pack(side='top')
 
 
+#logging to file
+logfile = "logfile.txt"
+
+def print_to_file(text):
+    f = open('logfile.txt', 'a')
+    sys.stdout = f
+    print(text)
+        
+
 def openNewWindow(var):
     print(var)
     newWindow = tk.Toplevel(window)
@@ -81,6 +90,7 @@ def openNewWindow(var):
     newWindow.configure(bg='white')
 
     def nslookup(Host_name):
+        start = "The result of nslookup is "
         print('#'*70)
         # Host_name = raw_input('Enter the host name: ')
         print('-'*70)
@@ -89,6 +99,8 @@ def openNewWindow(var):
 
         Outputfileobject = os.popen('nslookup {}'.format(Host_name))
         Output = Outputfileobject.read()
+        print_to_file(start)
+        print_to_file(Output)
         Outputfileobject.close()
         label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
         label99.pack()
@@ -99,12 +111,15 @@ def openNewWindow(var):
 
     def ping(ip):
         print('-'*60)
+        start = "The result of ping is: "
         try:
             # if it is not != 0 then something is wrong and raise Exception
             if os.system('ping {}'.format(ip)) != 0:
                 raise Exception('IP does not exist')
-            Outputfileobject = os.popen('nslookup {}'.format(ip))
+            Outputfileobject = os.popen('ping {}'.format(ip))
             Output = Outputfileobject.read()
+            print_to_file(start)
+            print_to_file(Output)
             Outputfileobject.close()
             label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
             label99.pack()
@@ -119,11 +134,14 @@ def openNewWindow(var):
     # Command for Window user
     def tracert(route_to_test):
         print('-'*60)
+        start ="The result of traceroute is: "
         try:
             # if it is not != 0 then something is wrong and raise Exception
             if os.system('tracert {}'.format(route_to_test)) == 0:
                 Outputfileobject = os.popen('tracert {}'.format(route_to_test))
                 Output = Outputfileobject.read()
+                print_to_file(start)
+                print_to_file(Output)
                 Outputfileobject.close()
                 label99 = tk.Label(newWindow, text='-'*70,
                                    font=('helvetica', 15))
@@ -143,12 +161,16 @@ def openNewWindow(var):
     # Command for Mac user
     def traceroute(route_to_test):
         print('-'*60)
+        start = "The result of traceroute is: "
+        print_to_file(start)
         try:
             # if it is not != 0 then something is wrong and raise Exception
             if os.system('traceroute {}'.format(route_to_test)) == 0:
                 Outputfileobject = os.popen(
                     'traceroute {}'.format(route_to_test))
                 Output = Outputfileobject.read()
+                
+                print_to_file(Output)
                 Outputfileobject.close()
                 label99 = tk.Label(newWindow, text='-'*70,
                                    font=('helvetica', 15))
@@ -173,13 +195,18 @@ def openNewWindow(var):
 
         # translate hostname to IPv4
         ip = socket.gethostbyname(host_ip)
-
+        start = "The result of port scan is: "
         # prints status block of target and when the scan starts
-        print("-" * 50)
-        print("Scanning: " + ip)
-        print("Scanning began at: " + str(datetime.now()).split('.')[0])
-        print("**approximate runtime is 1 minute 30 seconds**")
-        print("-" * 50)
+        p1 = print("-" * 50)
+        print_to_file(p1)
+        p2= print("Scanning: " + ip)
+        print_to_file(p2)
+        p3 = print("Scanning began at: " + str(datetime.now()).split('.')[0])
+        print_to_file(p3)
+        p4 =print("**approximate runtime is 1 minute 30 seconds**")
+        print_to_file(p4)
+        p5 = print("-" * 50)
+        print_to_file(p5)
 
         label0 = tk.Label(
             newWindow, text=("-" * 50), font=('helvetica', 20))
@@ -212,7 +239,8 @@ def openNewWindow(var):
         # Printing open ports
         for d in range(65535):
             if result[d] == 'open':
-                print("Port", d, 'is', result[d])
+                p6 = print("Port", d, 'is', result[d])
+                print_to_file(p6)
                 label1 = tk.Label(
                     newWindow, text="Port" + str(d) + 'is' + str(result[d]), font=('helvetica', 20))
                 label1.pack()
@@ -220,7 +248,8 @@ def openNewWindow(var):
 
         # Printing open ports in the list
 
-        print("\nThe Open Ports are:", OpenPorts)
+        p7 = print("\nThe Open Ports are:", OpenPorts)
+        print_to_file(p7)
         label99 = tk.Label(newWindow, text='-'*70,
                            font=('helvetica', 20))
         label99.pack()
@@ -229,7 +258,8 @@ def openNewWindow(var):
         label1a.pack()
 
         # Print out Completion time
-        print("\nScanning has finished at ", str(datetime.now()).split('.')[0])
+        p8 = print("\nScanning has finished at ", str(datetime.now()).split('.')[0])
+        print_to_file(p8)
         label1b = tk.Label(newWindow, text="\nScanning has finished at " +
                            str(datetime.now()).split('.')[0], font=('helvetica', 20))
         label1b.pack()
@@ -329,12 +359,18 @@ def openNewWindow(var):
         broadcast_address = ".".join(max_ip_address)
 
         # printing all the results
-        print("\n")
-        print("Network address is: %s" % network_address)
-        print("Broadcast address is: %s" % broadcast_address)
-        print("Number of hosts in subnet: %s" % num_of_hosts)
-        print("Wildcard mask is: %s " % wildcard_mask)
-        print("Mask bit is: %s " % num_ones)
+        start ="The result of subnet calcualtion: "
+        print_to_file(start)
+        p2 = print("Network address is: %s" % network_address)
+        print_to_file(p2)
+        p3 = print("Broadcast address is: %s" % broadcast_address)
+        print_to_file(p3)
+        p4 = print("Number of hosts in subnet: %s" % num_of_hosts)
+        print_to_file(p4)
+        p5 = print("Wildcard mask is: %s " % wildcard_mask)
+        print_to_file(p5)
+        p6 = print("Mask bit is: %s " % num_ones)
+        print_to_file(p6)
         label99 = tk.Label(newWindow, text='-'*70,
                            font=('helvetica', 10))
         label99.pack()
