@@ -3,6 +3,7 @@ import tkinter.ttk as st
 import os
 import sys
 import socket
+import threading
 from datetime import datetime
 
 window = tk.Tk()
@@ -31,6 +32,14 @@ photo5 = tk.PhotoImage(
     file=r"components\NsLookup.png")
 photo6 = tk.PhotoImage(
     file=r"components\Scan1.png")
+photo7 = tk.PhotoImage(
+    file=r"components\Pingbutto.png")
+photo8 = tk.PhotoImage(
+    file=r"components\TraceWin.png")
+photo9 = tk.PhotoImage(
+    file=r"components\traceMac.png")
+photo10 = tk.PhotoImage(
+    file=r"components\calc.png")
 
 # Defining the main label
 tk.Label(window, text="Network Tools", image=photo0, fg="black",
@@ -162,9 +171,6 @@ def openNewWindow(var):
         except:
             print('Command does not work')
         print('-'*60)
-
-    import socket
-    import threading
 
     def portScanner(host_ip='172.217.1.164'):
 
@@ -401,7 +407,7 @@ def openNewWindow(var):
         entry2a = tk.Entry(newWindow, font=("default", 20))
         canvas2.create_window(100, 240, window=entry2a)
 
-        btn2 = st.Button(newWindow, text='Scan', image=photo6,
+        btn2 = st.Button(newWindow, text='Scan', image=photo10,
                          style='W.TButton', command=lambda: subnet_calculation(entry2.get(), entry2a.get()))
         btn2.pack(side='top')
     elif var == 3:
@@ -419,7 +425,7 @@ def openNewWindow(var):
         entry3 = tk.Entry(newWindow, font=("default", 20))
         canvas3.create_window(100, 140, window=entry3)
 
-        btn3 = st.Button(newWindow, text='Ping', image=photo6,
+        btn3 = st.Button(newWindow, text='Ping', image=photo7,
                          style='W.TButton', command=lambda: ping(entry3.get()))
         btn3.pack(side='top')
     elif var == 4:
@@ -437,10 +443,10 @@ def openNewWindow(var):
         entry4 = tk.Entry(newWindow, font=("default", 20))
         canvas4.create_window(100, 140, window=entry4)
 
-        btn4 = st.Button(newWindow, text='Scan for windows',
+        btn4 = st.Button(newWindow, text='Scan for windows', image=photo8,
                          style='W.TButton', command=lambda: tracert(entry4.get()))
         btn4.pack(side='top')
-        btn4a = st.Button(newWindow, text='Scan for Mac',
+        btn4a = st.Button(newWindow, text='Scan for Mac', image=photo9,
                           style='W.TButton', command=lambda: traceroute(entry4.get()))
         btn4a.pack(side='top')
     else:
