@@ -9,15 +9,21 @@ from datetime import datetime
 window = tk.Tk()
 window.title("Network Troubleshooting Tools App")
 window.geometry('800x800')
+window.configure(bg='white')
 photo = tk.PhotoImage(
-    file=r"components\Background.png")
+    file=r"components\Background.jpg")
+
 w = photo.width()
 h = photo.height()
+#window.geometry('%dx%d+0+0' % (w, h))
 
+# Defining style
+style = st.Style()
 
+style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
+                foreground='black')
 # Defining photos
-photo = tk.PhotoImage(
-    file=r"components\Background.png")
+
 photo0 = tk.PhotoImage(
     file=r"components\NetworkTools.png")
 photo1 = tk.PhotoImage(
@@ -31,7 +37,7 @@ photo4 = tk.PhotoImage(
 photo5 = tk.PhotoImage(
     file=r"components\NsLookup.png")
 photo6 = tk.PhotoImage(
-    file=r"components\Scan1.png")
+    file=r"components\Scan2.png")
 photo7 = tk.PhotoImage(
     file=r"components\Pingbutto.png")
 photo8 = tk.PhotoImage(
@@ -41,10 +47,10 @@ photo9 = tk.PhotoImage(
 photo10 = tk.PhotoImage(
     file=r"components\calc.png")
 
-# Defining the main label
-tk.Label(window, text="Network Tools", image=photo0, fg="black",
-         font="Helvetica 50 bold italic").pack(expand=1)
 
+# Defining the main label
+tk.Label(window, text="Network Tools", image=photo0,
+         font="Helvetica 50 bold italic").pack(expand=1)
 # Defining buttons
 btn1 = st.Button(window, text='Port Scan', image=photo1,
                  style='W.TButton', command=lambda: openNewWindow(1))
@@ -66,27 +72,13 @@ btn5 = st.Button(window, text='Nslookup',
                  style='W.TButton',  image=photo5, command=lambda: openNewWindow(5))
 btn5.pack(side='top')
 
-# Defining style
-style = st.Style()
-
-style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
-                foreground='black')
-
-'''
-def nslookup(Host_name):
-    print('#'*70)
-    # Host_name = raw_input('Enter the host name: ')
-    print('-'*70)
-    os.system('nslookup {}'.format(Host_name))
-    print('-'*70)
-   '''
-
 
 def openNewWindow(var):
     print(var)
     newWindow = tk.Toplevel(window)
     newWindow.title("New Window")
     newWindow.geometry('800x800')
+    newWindow.configure(bg='white')
 
     def nslookup(Host_name):
         print('#'*70)
@@ -94,14 +86,15 @@ def openNewWindow(var):
         print('-'*70)
         os.system('nslookup {}'.format(Host_name))
         print('-'*70)
+
         Outputfileobject = os.popen('nslookup {}'.format(Host_name))
         Output = Outputfileobject.read()
         Outputfileobject.close()
-        label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+        label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
         label99.pack()
-        label3 = tk.Label(newWindow, text=Output, font=('helvetica', 10))
+        label3 = tk.Label(newWindow, text=Output, font=('helvetica', 20))
         label3.pack()
-        label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+        label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
         label99.pack()
 
     def ping(ip):
@@ -113,11 +106,11 @@ def openNewWindow(var):
             Outputfileobject = os.popen('nslookup {}'.format(ip))
             Output = Outputfileobject.read()
             Outputfileobject.close()
-            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
             label99.pack()
-            label3 = tk.Label(newWindow, text=Output, font=('helvetica', 10))
+            label3 = tk.Label(newWindow, text=Output, font=('helvetica', 20))
             label3.pack()
-            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
             label99.pack()
         except:
             print('Command does not work')
@@ -133,13 +126,13 @@ def openNewWindow(var):
                 Output = Outputfileobject.read()
                 Outputfileobject.close()
                 label99 = tk.Label(newWindow, text='-'*70,
-                                   font=('helvetica', 10))
+                                   font=('helvetica', 15))
                 label99.pack()
                 label3 = tk.Label(newWindow, text=Output,
-                                  font=('helvetica', 10))
+                                  font=('helvetica', 15))
                 label3.pack()
                 label99 = tk.Label(newWindow, text='-'*70,
-                                   font=('helvetica', 10))
+                                   font=('helvetica', 15))
                 label99.pack()
             else:
                 raise Exception('Route does not exist')
@@ -158,13 +151,13 @@ def openNewWindow(var):
                 Output = Outputfileobject.read()
                 Outputfileobject.close()
                 label99 = tk.Label(newWindow, text='-'*70,
-                                   font=('helvetica', 10))
+                                   font=('helvetica', 15))
                 label99.pack()
                 label3 = tk.Label(newWindow, text=Output,
-                                  font=('helvetica', 10))
+                                  font=('helvetica', 15))
                 label3.pack()
                 label99 = tk.Label(newWindow, text='-'*70,
-                                   font=('helvetica', 10))
+                                   font=('helvetica', 15))
                 label99.pack()
             else:
                 raise Exception('Route does not exist')
@@ -189,19 +182,19 @@ def openNewWindow(var):
         print("-" * 50)
 
         label0 = tk.Label(
-            newWindow, text=("-" * 50), font=('helvetica', 10))
+            newWindow, text=("-" * 50), font=('helvetica', 20))
         label0.pack()
         label2 = tk.Label(
-            newWindow, text=("Scanning: " + ip), font=('helvetica', 10))
+            newWindow, text=("Scanning: " + ip), font=('helvetica', 20))
         label2.pack()
         label3 = tk.Label(
-            newWindow, text=("Scanning began at: " + str(datetime.now()).split('.')[0]), font=('helvetica', 10))
+            newWindow, text=("Scanning began at: " + str(datetime.now()).split('.')[0]), font=('helvetica', 20))
         label3.pack()
         label4 = tk.Label(
-            newWindow, text=("**approximate runtime is 1 minute 30 seconds**"), font=('helvetica', 10))
+            newWindow, text=("**approximate runtime is 1 minute 30 seconds**"), font=('helvetica', 20))
         label4.pack()
         label5 = tk.Label(
-            newWindow, text=("-" * 50), font=('helvetica', 10))
+            newWindow, text=("-" * 50), font=('helvetica', 20))
         label5.pack()
         # Spawning threads to scan ports
         for a in range(65535):
@@ -221,7 +214,7 @@ def openNewWindow(var):
             if result[d] == 'open':
                 print("Port", d, 'is', result[d])
                 label1 = tk.Label(
-                    newWindow, text="Port" + str(d) + 'is' + str(result[d]), font=('helvetica', 10))
+                    newWindow, text="Port" + str(d) + 'is' + str(result[d]), font=('helvetica', 20))
                 label1.pack()
                 OpenPorts.append(d)
 
@@ -229,19 +222,19 @@ def openNewWindow(var):
 
         print("\nThe Open Ports are:", OpenPorts)
         label99 = tk.Label(newWindow, text='-'*70,
-                           font=('helvetica', 10))
+                           font=('helvetica', 20))
         label99.pack()
         label1a = tk.Label(newWindow, text="\nThe Open Ports are:" +
-                           str(OpenPorts), font=('helvetica', 10))
+                           str(OpenPorts), font=('helvetica', 20))
         label1a.pack()
 
         # Print out Completion time
         print("\nScanning has finished at ", str(datetime.now()).split('.')[0])
         label1b = tk.Label(newWindow, text="\nScanning has finished at " +
-                           str(datetime.now()).split('.')[0], font=('helvetica', 10))
+                           str(datetime.now()).split('.')[0], font=('helvetica', 20))
         label1b.pack()
         label99 = tk.Label(newWindow, text='-'*70,
-                           font=('helvetica', 10))
+                           font=('helvetica', 20))
         label99.pack()
 
     def TCP_connect(ip, port, result):
@@ -346,22 +339,22 @@ def openNewWindow(var):
                            font=('helvetica', 10))
         label99.pack()
         label0 = tk.Label(
-            newWindow, text=("Network address is" + str(network_address)), font=('helvetica', 10))
+            newWindow, text=("Network address is" + str(network_address)), font=('helvetica', 20))
         label0.pack()
         label2 = tk.Label(
-            newWindow, text=("Broadcast address is" + str(broadcast_address)), font=('helvetica', 10))
+            newWindow, text=("Broadcast address is" + str(broadcast_address)), font=('helvetica', 20))
         label2.pack()
         label3 = tk.Label(
-            newWindow, text=("Number of hosts in subnet:" + str(num_of_hosts)), font=('helvetica', 10))
+            newWindow, text=("Number of hosts in subnet:" + str(num_of_hosts)), font=('helvetica', 20))
         label3.pack()
         label4 = tk.Label(
-            newWindow, text=("Wildcard mask is: " + str(wildcard_mask)), font=('helvetica', 10))
+            newWindow, text=("Wildcard mask is: " + str(wildcard_mask)), font=('helvetica', 20))
         label4.pack()
         label5 = tk.Label(
-            newWindow, text=("Mask bit is: " + str(num_ones)), font=('helvetica', 10))
+            newWindow, text=("Mask bit is: " + str(num_ones)), font=('helvetica', 20))
         label5.pack()
         label99 = tk.Label(newWindow, text='-'*70,
-                           font=('helvetica', 10))
+                           font=('helvetica', 20))
         label99.pack()
 
     #
@@ -371,11 +364,11 @@ def openNewWindow(var):
                  text="Port Scan", image=photo1, fg="black",
                  font="Helvetica 50 bold italic").pack()
 
-        canvas1 = tk.Canvas(newWindow, width=200, height=200)
+        canvas1 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas1.pack()
 
         label1 = tk.Label(newWindow, text='Type your IP Address:')
-        label1.config(font=('helvetica', 10))
+        label1.config(font=('helvetica', 20))
         canvas1.create_window(100, 100, window=label1)
 
         entry1 = tk.Entry(newWindow, font=("default", 20))
@@ -390,7 +383,7 @@ def openNewWindow(var):
                  text="Subnetting and \n IP calculator", image=photo2, fg="black",
                  font="Helvetica 50 bold italic").pack()
 
-        canvas2 = tk.Canvas(newWindow, width=200, height=300)
+        canvas2 = tk.Canvas(newWindow, bg="white", width=200, height=300)
         canvas2.pack()
 
         label2 = tk.Label(newWindow, text='Type your IP Address:')
@@ -415,7 +408,7 @@ def openNewWindow(var):
         tk.Label(newWindow,
                  text="Ping", image=photo3, fg="black",
                  font="Helvetica 50 bold italic").pack()
-        canvas3 = tk.Canvas(newWindow, width=200, height=200)
+        canvas3 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas3.pack()
 
         label3 = tk.Label(newWindow, text='Type your IP Address:')
@@ -433,7 +426,7 @@ def openNewWindow(var):
         tk.Label(newWindow,
                  text="Trace Route", image=photo4, fg="black",
                  font="Helvetica 50 bold italic").pack()
-        canvas4 = tk.Canvas(newWindow, width=200, height=200)
+        canvas4 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas4.pack()
 
         label4 = tk.Label(newWindow, text='Type your route:')
@@ -454,7 +447,7 @@ def openNewWindow(var):
         tk.Label(newWindow,
                  text="Nslookup", image=photo5, fg="black",
                  font="Helvetica 50 bold italic").pack()
-        canvas5 = tk.Canvas(newWindow, width=200, height=200)
+        canvas5 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas5.pack()
 
         label5 = tk.Label(newWindow, text='Type your IP Address:')
