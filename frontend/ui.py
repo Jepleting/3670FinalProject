@@ -104,8 +104,12 @@ def openNewWindow(var):
             Outputfileobject = os.popen('nslookup {}'.format(ip))
             Output = Outputfileobject.read()
             Outputfileobject.close()
+            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+            label99.pack()
             label3 = tk.Label(newWindow, text=Output, font=('helvetica', 10))
             label3.pack()
+            label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 10))
+            label99.pack()
         except:
             print('Command does not work')
         print('-'*60)
@@ -115,7 +119,20 @@ def openNewWindow(var):
         print('-'*60)
         try:
             # if it is not != 0 then something is wrong and raise Exception
-            if os.system('tracert {}'.format(route_to_test)) != 0:
+            if os.system('tracert {}'.format(route_to_test)) == 0:
+                Outputfileobject = os.popen('tracert {}'.format(route_to_test))
+                Output = Outputfileobject.read()
+                Outputfileobject.close()
+                label99 = tk.Label(newWindow, text='-'*70,
+                                   font=('helvetica', 10))
+                label99.pack()
+                label3 = tk.Label(newWindow, text=Output,
+                                  font=('helvetica', 10))
+                label3.pack()
+                label99 = tk.Label(newWindow, text='-'*70,
+                                   font=('helvetica', 10))
+                label99.pack()
+            else:
                 raise Exception('Route does not exist')
         except:
             print('Command does not work')
@@ -126,7 +143,21 @@ def openNewWindow(var):
         print('-'*60)
         try:
             # if it is not != 0 then something is wrong and raise Exception
-            if os.system('traceroute {}'.format(route_to_test)) != 0:
+            if os.system('traceroute {}'.format(route_to_test)) == 0:
+                Outputfileobject = os.popen(
+                    'traceroute {}'.format(route_to_test))
+                Output = Outputfileobject.read()
+                Outputfileobject.close()
+                label99 = tk.Label(newWindow, text='-'*70,
+                                   font=('helvetica', 10))
+                label99.pack()
+                label3 = tk.Label(newWindow, text=Output,
+                                  font=('helvetica', 10))
+                label3.pack()
+                label99 = tk.Label(newWindow, text='-'*70,
+                                   font=('helvetica', 10))
+                label99.pack()
+            else:
                 raise Exception('Route does not exist')
         except:
             print('Command does not work')
@@ -151,6 +182,21 @@ def openNewWindow(var):
         print("**approximate runtime is 1 minute 30 seconds**")
         print("-" * 50)
 
+        label0 = tk.Label(
+            newWindow, text=("-" * 50), font=('helvetica', 10))
+        label0.pack()
+        label2 = tk.Label(
+            newWindow, text=("Scanning: " + ip), font=('helvetica', 10))
+        label2.pack()
+        label3 = tk.Label(
+            newWindow, text=("Scanning began at: " + str(datetime.now()).split('.')[0]), font=('helvetica', 10))
+        label3.pack()
+        label4 = tk.Label(
+            newWindow, text=("**approximate runtime is 1 minute 30 seconds**"), font=('helvetica', 10))
+        label4.pack()
+        label5 = tk.Label(
+            newWindow, text=("-" * 50), font=('helvetica', 10))
+        label5.pack()
         # Spawning threads to scan ports
         for a in range(65535):
             t = threading.Thread(target=TCP_connect, args=(ip, a, result))
@@ -168,13 +214,29 @@ def openNewWindow(var):
         for d in range(65535):
             if result[d] == 'open':
                 print("Port", d, 'is', result[d])
+                label1 = tk.Label(
+                    newWindow, text="Port" + str(d) + 'is' + str(result[d]), font=('helvetica', 10))
+                label1.pack()
                 OpenPorts.append(d)
 
         # Printing open ports in the list
 
         print("\nThe Open Ports are:", OpenPorts)
+        label99 = tk.Label(newWindow, text='-'*70,
+                           font=('helvetica', 10))
+        label99.pack()
+        label1a = tk.Label(newWindow, text="\nThe Open Ports are:" +
+                           str(OpenPorts), font=('helvetica', 10))
+        label1a.pack()
+
         # Print out Completion time
         print("\nScanning has finished at ", str(datetime.now()).split('.')[0])
+        label1b = tk.Label(newWindow, text="\nScanning has finished at " +
+                           str(datetime.now()).split('.')[0], font=('helvetica', 10))
+        label1b.pack()
+        label99 = tk.Label(newWindow, text='-'*70,
+                           font=('helvetica', 10))
+        label99.pack()
 
     def TCP_connect(ip, port, result):
         TCPsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -274,6 +336,28 @@ def openNewWindow(var):
         print("Number of hosts in subnet: %s" % num_of_hosts)
         print("Wildcard mask is: %s " % wildcard_mask)
         print("Mask bit is: %s " % num_ones)
+        label99 = tk.Label(newWindow, text='-'*70,
+                           font=('helvetica', 10))
+        label99.pack()
+        label0 = tk.Label(
+            newWindow, text=("Network address is" + str(network_address)), font=('helvetica', 10))
+        label0.pack()
+        label2 = tk.Label(
+            newWindow, text=("Broadcast address is" + str(broadcast_address)), font=('helvetica', 10))
+        label2.pack()
+        label3 = tk.Label(
+            newWindow, text=("Number of hosts in subnet:" + str(num_of_hosts)), font=('helvetica', 10))
+        label3.pack()
+        label4 = tk.Label(
+            newWindow, text=("Wildcard mask is: " + str(wildcard_mask)), font=('helvetica', 10))
+        label4.pack()
+        label5 = tk.Label(
+            newWindow, text=("Mask bit is: " + str(num_ones)), font=('helvetica', 10))
+        label5.pack()
+        label99 = tk.Label(newWindow, text='-'*70,
+                           font=('helvetica', 10))
+        label99.pack()
+
     #
     if var == 1:
         newWindow.title("Port Scan")
