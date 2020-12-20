@@ -20,7 +20,7 @@ h = photo.height()
 # Defining style
 style = st.Style()
 
-style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
+style.configure('W.TButton', background='white', font=('arial', 20, 'bold', 'underline'),
                 foreground='black')
 # Defining photos
 
@@ -49,7 +49,7 @@ photo10 = tk.PhotoImage(
 
 
 # Defining the main label
-tk.Label(window, text="Network Tools", image=photo0,
+tk.Label(window, text="Network Tools", bg="white", image=photo0,
          font="Helvetica 50 bold italic").pack(expand=1)
 # Defining buttons
 btn1 = st.Button(window, text='Port Scan', image=photo1,
@@ -103,12 +103,13 @@ def openNewWindow(var):
             # if it is not != 0 then something is wrong and raise Exception
             if os.system('ping {}'.format(ip)) != 0:
                 raise Exception('IP does not exist')
-            Outputfileobject = os.popen('nslookup {}'.format(ip))
+            Outputfileobject = os.popen('ping {}'.format(ip))
             Output = Outputfileobject.read()
             Outputfileobject.close()
             label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
             label99.pack()
-            label3 = tk.Label(newWindow, text=Output, font=('helvetica', 20))
+            label3 = tk.Label(newWindow, bg="white",
+                              text=Output, font=('helvetica', 20))
             label3.pack()
             label99 = tk.Label(newWindow, text='-'*70, font=('helvetica', 20))
             label99.pack()
@@ -361,7 +362,7 @@ def openNewWindow(var):
     if var == 1:
         newWindow.title("Port Scan")
         tk.Label(newWindow,
-                 text="Port Scan", image=photo1, fg="black",
+                 text="Port Scan", image=photo1, bg="white", fg="black",
                  font="Helvetica 50 bold italic").pack()
 
         canvas1 = tk.Canvas(newWindow, bg="white", width=200, height=200)
@@ -380,7 +381,7 @@ def openNewWindow(var):
     elif var == 2:
         newWindow.title("Subnetting and IP calculator")
         tk.Label(newWindow,
-                 text="Subnetting and \n IP calculator", image=photo2, fg="black",
+                 text="Subnetting and \n IP calculator", image=photo2, bg="white", fg="black",
                  font="Helvetica 50 bold italic").pack()
 
         canvas2 = tk.Canvas(newWindow, bg="white", width=200, height=300)
@@ -406,7 +407,7 @@ def openNewWindow(var):
     elif var == 3:
         newWindow.title("Ping")
         tk.Label(newWindow,
-                 text="Ping", image=photo3, fg="black",
+                 text="Ping", image=photo3, bg="white", fg="black",
                  font="Helvetica 50 bold italic").pack()
         canvas3 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas3.pack()
@@ -424,7 +425,7 @@ def openNewWindow(var):
     elif var == 4:
         newWindow.title("Trace Route")
         tk.Label(newWindow,
-                 text="Trace Route", image=photo4, fg="black",
+                 text="Trace Route", image=photo4, bg="white", fg="black",
                  font="Helvetica 50 bold italic").pack()
         canvas4 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas4.pack()
@@ -445,7 +446,7 @@ def openNewWindow(var):
     else:
         newWindow.title("Nslookup")
         tk.Label(newWindow,
-                 text="Nslookup", image=photo5, fg="black",
+                 text="Nslookup", image=photo5, bg="white", fg="black",
                  font="Helvetica 50 bold italic").pack()
         canvas5 = tk.Canvas(newWindow, bg="white", width=200, height=200)
         canvas5.pack()
