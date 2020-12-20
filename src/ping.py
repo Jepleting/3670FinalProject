@@ -12,4 +12,3 @@ def ping(ip):
     print('-'*60)
     sys.exit(1)
 
-ping()
