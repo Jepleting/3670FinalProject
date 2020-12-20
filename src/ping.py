@@ -5,7 +5,9 @@ import sys
 def ping(ip):
     print('-'*60)
     try:
-        if os.system('ping {}'.format(ip)) != 0: # if it is not != 0 then something is wrong and raise Exception
+        # if it is not != 0 then something is wrong and raise Exception
+        # also only run 4 packets and exit.
+        if os.system('ping -c 4 {}'.format(ip)) != 0: 
             raise Exception('IP does not exist')
     except:
         print('Command does not work')
