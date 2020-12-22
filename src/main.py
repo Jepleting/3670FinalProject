@@ -98,7 +98,7 @@ def openNewWindow(var):
         print('-'*70)
         try:
             # if it is not != 0 then something is wrong and raise Exception
-            if os.system('nslookup {}'.format(Host_name)) != 0:
+            if os.system('nslookup {}'.format(Host_name)) == 0:
                 Outputfileobject = os.popen('nslookup {}'.format(Host_name))
                 Output = Outputfileobject.read()
                 print_to_file(start)
