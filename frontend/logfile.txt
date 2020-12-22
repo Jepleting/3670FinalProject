@@ -90,3 +90,54 @@ Address:  2001:1970:5d1d:ea00:8a71:b1ff:fe0d:494d
 
 
 ----------------------------------------------------------------------
+None
+Scanning: 172.217.165.4
+None
+Scanning began at: 2020-12-21 18:53:10
+None
+**approximate runtime is 1 minute 30 seconds**
+None
+--------------------------------------------------
+None
+Port 80 is open
+None
+Port 443 is open
+None
+
+The Open Ports are: [80, 443]
+None
+
+Scanning has finished at  2020-12-21 18:53:25
+None
+--------------------------------------------------
+None
+Scanning: 0.0.0.0
+None
+Scanning began at: 2020-12-21 18:53:56
+None
+**approximate runtime is 1 minute 30 seconds**
+None
+--------------------------------------------------
+None
+
+The Open Ports are: []
+None
+
+Scanning has finished at  2020-12-21 18:54:09
+None
+--------------------------------------------------
+None
+Scanning: 0.0.0.0
+None
+Scanning began at: 2020-12-21 18:54:34
+None
+**approximate runtime is 1 minute 30 seconds**
+None
+--------------------------------------------------
+None
+
+The Open Ports are: []
+None
+
+Scanning has finished at  2020-12-21 18:54:46
+None

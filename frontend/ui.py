@@ -11,11 +11,12 @@ window.title("Network Troubleshooting Tools App")
 window.geometry('800x800')
 window.configure(bg='white')
 photo = tk.PhotoImage(
-    file=r"components/Background.jpg")
-
+    file=r"components/Background.png")
+background_label = tk.Label(window, image=photo)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 w = photo.width()
 h = photo.height()
-#window.geometry('%dx%d+0+0' % (w, h))
+window.geometry('%dx%d+0+0' % (w, h))
 
 # Defining style
 style = st.Style()
@@ -27,7 +28,7 @@ style.configure('W.TButton', font=('arial', 20, 'bold', 'underline'),
 photo0 = tk.PhotoImage(
     file=r"components/NetworkTools.png")
 photo1 = tk.PhotoImage(
-    file=r"components/PortScanner.png")
+    file=r"components/PortScanner1.png")
 photo2 = tk.PhotoImage(
     file=r"components/SubnetAndIPCalculator.png")
 photo3 = tk.PhotoImage(
@@ -87,8 +88,10 @@ def openNewWindow(var):
     print(var)
     newWindow = tk.Toplevel(window)
     newWindow.title("New Window")
-    newWindow.geometry('800x800')
+    newWindow.geometry('%dx%d+0+0' % (w, h))
     newWindow.configure(bg='white')
+    background_label = tk.Label(newWindow, image=photo)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
     def nslookup(Host_name):
         start = "The result of nslookup is "
@@ -215,81 +218,84 @@ def openNewWindow(var):
         connections = []        # To run connections at the same time
         result = {}         # all
         OpenPorts = []
+        try:
+            # translate hostname to IPv4
+            ip = socket.gethostbyname(host_ip)
+            start = "The result of port scan is: "
+            # prints status block of target and when the scan starts
+            p1 = print("-" * 50)
+            print_to_file(p1)
+            p2 = print("Scanning: " + ip)
+            print_to_file(p2)
+            p3 = print("Scanning began at: " +
+                       str(datetime.now()).split('.')[0])
+            print_to_file(p3)
+            p4 = print("**approximate runtime is 1 minute 30 seconds**")
+            print_to_file(p4)
+            p5 = print("-" * 50)
+            print_to_file(p5)
 
-        # translate hostname to IPv4
-        ip = socket.gethostbyname(host_ip)
-        start = "The result of port scan is: "
-        # prints status block of target and when the scan starts
-        p1 = print("-" * 50)
-        print_to_file(p1)
-        p2 = print("Scanning: " + ip)
-        print_to_file(p2)
-        p3 = print("Scanning began at: " + str(datetime.now()).split('.')[0])
-        print_to_file(p3)
-        p4 = print("**approximate runtime is 1 minute 30 seconds**")
-        print_to_file(p4)
-        p5 = print("-" * 50)
-        print_to_file(p5)
+            label0 = tk.Label(
+                newWindow, text=("-" * 50), bg="white", font=('helvetica', 20))
+            label0.pack()
+            label2 = tk.Label(
+                newWindow, text=("Scanning: " + ip), bg="white", font=('helvetica', 20))
+            label2.pack()
+            label3 = tk.Label(
+                newWindow, text=("Scanning began at: " + str(datetime.now()).split('.')[0]), bg="white", font=('helvetica', 20))
+            label3.pack()
+            label4 = tk.Label(
+                newWindow, text=("**approximate runtime is 1 minute 30 seconds**"), bg="white", font=('helvetica', 20))
+            label4.pack()
+            label5 = tk.Label(
+                newWindow, text=("-" * 50), bg="white", font=('helvetica', 20))
+            label5.pack()
+            # Spawning threads to scan ports
+            for a in range(65535):
+                t = threading.Thread(target=TCP_connect, args=(ip, a, result))
+                connections.append(t)
 
-        label0 = tk.Label(
-            newWindow, text=("-" * 50), bg="white", font=('helvetica', 20))
-        label0.pack()
-        label2 = tk.Label(
-            newWindow, text=("Scanning: " + ip), bg="white", font=('helvetica', 20))
-        label2.pack()
-        label3 = tk.Label(
-            newWindow, text=("Scanning began at: " + str(datetime.now()).split('.')[0]), bg="white", font=('helvetica', 20))
-        label3.pack()
-        label4 = tk.Label(
-            newWindow, text=("**approximate runtime is 1 minute 30 seconds**"), bg="white", font=('helvetica', 20))
-        label4.pack()
-        label5 = tk.Label(
-            newWindow, text=("-" * 50), bg="white", font=('helvetica', 20))
-        label5.pack()
-        # Spawning threads to scan ports
-        for a in range(65535):
-            t = threading.Thread(target=TCP_connect, args=(ip, a, result))
-            connections.append(t)
+            # Starting threads
+            for b in range(65535):
+                connections[b].start()
 
-        # Starting threads
-        for b in range(65535):
-            connections[b].start()
+            # Locking the main thread until all threads complete
+            for c in range(65535):
+                connections[c].join()
 
-        # Locking the main thread until all threads complete
-        for c in range(65535):
-            connections[c].join()
+            # Printing open ports
+            for d in range(65535):
+                if result[d] == 'open':
+                    p6 = print("Port", d, 'is', result[d])
+                    print_to_file(p6)
+                    label1 = tk.Label(
+                        newWindow, text="Port " + str(d) + ' is ' + str(result[d]), bg="white", font=('helvetica', 20))
+                    label1.pack()
+                    OpenPorts.append(d)
 
-        # Printing open ports
-        for d in range(65535):
-            if result[d] == 'open':
-                p6 = print("Port", d, 'is', result[d])
-                print_to_file(p6)
-                label1 = tk.Label(
-                    newWindow, text="Port" + str(d) + 'is' + str(result[d]), bg="white", font=('helvetica', 20))
-                label1.pack()
-                OpenPorts.append(d)
+            # Printing open ports in the list
 
-        # Printing open ports in the list
+            p7 = print("\nThe Open Ports are:", OpenPorts)
+            print_to_file(p7)
+            label99 = tk.Label(newWindow, text='-'*70, bg="white",
+                               font=('helvetica', 20))
+            label99.pack()
+            label1a = tk.Label(newWindow, text="\nThe Open Ports are: " +
+                               str(OpenPorts), bg="white", font=('helvetica', 20))
+            label1a.pack()
 
-        p7 = print("\nThe Open Ports are:", OpenPorts)
-        print_to_file(p7)
-        label99 = tk.Label(newWindow, text='-'*70, bg="white",
-                           font=('helvetica', 20))
-        label99.pack()
-        label1a = tk.Label(newWindow, text="\nThe Open Ports are:" +
-                           str(OpenPorts), bg="white", font=('helvetica', 20))
-        label1a.pack()
-
-        # Print out Completion time
-        p8 = print("\nScanning has finished at ",
-                   str(datetime.now()).split('.')[0])
-        print_to_file(p8)
-        label1b = tk.Label(newWindow, text="\nScanning has finished at " +
-                           str(datetime.now()).split('.')[0], bg="white", font=('helvetica', 20))
-        label1b.pack()
-        label99 = tk.Label(newWindow, text='-'*70, bg="white",
-                           font=('helvetica', 20))
-        label99.pack()
+            # Print out Completion time
+            p8 = print("\nScanning has finished at ",
+                       str(datetime.now()).split('.')[0])
+            print_to_file(p8)
+            label1b = tk.Label(newWindow, text="\nScanning has finished at " +
+                               str(datetime.now()).split('.')[0], bg="white", font=('helvetica', 20))
+            label1b.pack()
+            label99 = tk.Label(newWindow, text='-'*70, bg="white",
+                               font=('helvetica', 20))
+            label99.pack()
+        except:
+            print("Error")
 
     def TCP_connect(ip, port, result):
         TCPsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -421,7 +427,7 @@ def openNewWindow(var):
     if var == 1:
         newWindow.title("Port Scan")
         tk.Label(newWindow,
-                 text="Port Scan", image=photo1, fg="black", bg="white",
+                 text="Port Scan", image=photo1, bg="white",
                  font="Helvetica 50 bold italic").pack()
 
         canvas1 = tk.Canvas(newWindow, bg="white", width=200, height=200)
