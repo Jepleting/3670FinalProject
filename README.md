@@ -1,5 +1,5 @@
 # 3670 Final Project
-Submission for group 11
+Submission for group 11. Use the main branch for evaluation.
 
 ## Test cases
 
