@@ -24,4 +24,6 @@ After running this command, a new window will open and it will look like this
 
 <img src="screenshots/mainUI.png" width=800>
 
+## Additional information
 
+If you have any doubts regarding the submission, please contact any of the group member through email.
